@@ -15,76 +15,97 @@ const check = (label, ok) => console.log(`${ok ? "✓" : "✗"} ${label}`);
 // STEP 1 — Task 9.1: select TEN ways. Store each in a const, then log it.
 // ============================================
 // TODO 1  the h1
-const h1 = document.querySelector('h1');
+const heading = document.querySelector("h1");
+console.log(heading);
 // TODO 2  all elements with class "content"
-const contents = document.querySelectorAll('.content');
+const contentParagraphs = document.querySelectorAll(".content");
+console.log(contentParagraphs);
 // TODO 3  the form with id "contact-form" (use getElementById — no #)
-const form = document.getElementById('contact-form');
+const contactForm = document.getElementById("contact-form");
+console.log(contactForm);
 // TODO 4  the email input INSIDE the form (one querySelector with a descendant selector)
-const emailinput = document.querySelector("contact-form input[type='email']");
+const emailInput = document.querySelector("#contact-form input[type='email']");
+console.log(emailInput);
 // TODO 5  all list items in the nav
-const navitems = document.querySelectorAll('nav li');
+const navItems = document.querySelectorAll(".nav-list li");
+console.log(navItems);
 // TODO 6  the first .nav-link
-const firstnavlink = document.querySelector('.nav-link');
+const firstNavLink = document.querySelector(".nav-link");
+console.log(firstNavLink);
 // TODO 7  the last paragraph in the article   (hint: p:last-of-type)
-const lastparagraph = document.querySelector('article p:last-of-type');
+const lastParagraph = document.querySelector("article p:last-of-type");
+console.log(lastParagraph);
 // TODO 8–10  three more of your own — e.g. the submit button, every h2 in main, the footer
-const submitbutton = document.querySelector('form button[type="submit"]');
-const h2s = document.querySelectorAll('main h2');
-const footer = document.querySelector('footer');
+const submitButton = document.querySelector("button[type='submit']");
+const allH2InMain = document.querySelectorAll("main h2");
+const footer = document.querySelector("footer");
 
+console.log(submitButton);
+console.log(allH2InMain);
+console.log(footer);
 // Then: what does document.querySelector(".does-not-exist") return? Log it.
+console.log(document.querySelector(".does-not-exist")); // null
 // And:  turn your nav items NodeList into an array of their text with [...list].map()
+const navTexts = [...navItems].map(li => li.textContent);
+console.log(navTexts);
 
 
 // ============================================
 // STEP 2 — Task 9.2: traverse. Say the route out loud before you write it.
 // ============================================
-const header = document.querySelector('header');
-const article = document.querySelector('article');
-const ul = document.querySelector(".nav-list");
-
 // TODO 1  from the header, find the nav inside it
-console.log(header.querySelector('nav'));
+const header = document.querySelector("#main-header");
+const nav = header.querySelector("nav");
+console.log(nav);
+
 // TODO 2  from the first .nav-link, get its parent li
-console.log(firstnavlink.parentElement);
+const parentLi = firstNavLink.parentElement;
+console.log(parentLi);
+
 // TODO 3  from the article, get its next sibling (should be a section)
-console.log(article.nextElementSibling);
+const article = document.querySelector("article");
+const nextSection = article.nextElementSibling;
+console.log(nextSection);
 // TODO 4  from the ul, get all its child li elements
-console.log(ul.children);
+const ul = document.querySelector(".nav-list");
+const childLis = ul.children; // or ul.querySelectorAll("li")
+console.log(childLis);
 // TODO 5  from the footer, go up to the body
-console.log(footer.parentElement);
+const body = footer.closest("body"); // or footer.parentElement.parentElement
+console.log(body);
 // TODO 6  from the first .nav-link, use closest() to reach the header
-console.log(firstnavlink.closest('header'));
+const closestHeader = firstNavLink.closest("header");
+console.log(closestHeader);
 
 
 // ============================================
 // STEP 3 — Task 9.3: change things
 // ============================================
 // TODO 1  change the h1 text to something of yours
-h1.textContent = "my DOM masterclass!";
+heading.textContent = "My DOM Practice";
 // TODO 2  point the first .nav-link at https://developer.mozilla.org, open in a new tab
+firstNavLink.href = "https://developer.mozilla.org";
+firstNavLink.target = "_blank";
+firstNavLink.rel = "noopener";
+
 //         (target="_blank" and rel="noopener")
-firstLink.href = "https://developer.mozilla.org";
-firstLink.target = "_blank";
-firstLink.rel = "noopener";
 // TODO 3  read the article's data-id and data-category with dataset; add data-status="reviewed"
-console.log(article.dataset.id, article.dataset.category);
+console.log(article.dataset.id);        // "42"
+console.log(article.dataset.category);  // "tech"
 article.dataset.status = "reviewed";
 // TODO 4  add the class "highlight" to the first .content paragraph,
 //         toggle "accent" on the second — NO element.style
-contents[0].classList.add("highlight");
-contents[1].classList.toggle("accent");
-//
+contentParagraphs[0].classList.add("highlight");
+contentParagraphs[1].classList.toggle("accent");
 // TODO 5  THE INJECTION DEMO — run these two lines and watch:
 //   const userInput = `<img src="x" onerror="alert('hacked!')">`;
 //   document.getElementById("unsafe").innerHTML = userInput;   // what happens?
 //   document.getElementById("safe").textContent = userInput;   // and now?
 //   Write one sentence in a comment: which one would you use for a user's comment, and why?
 const userInput = `<img src="x" onerror="alert('hacked!')">`;
-document.getElementById("unsafe").innerHTML = userInput;
-document.getElementById("safe").textContent = userInput;
-// I would use textContent for a user's comment because it prevents the execution of any malicious code that could be injected into the page, ensuring the safety and security of the website and its users.
+document.getElementById("unsafe").innerHTML = userInput;   // runs the alert (dangerous)
+document.getElementById("safe").textContent = userInput;   // shows the text safely
+
 
 // ============================================
 // STEP 4 — Task 9.4: create, remove, clone
@@ -94,31 +115,30 @@ document.getElementById("safe").textContent = userInput;
 // function addNavItem(text, href) { }
 // addNavItem("Blog", "#blog");
 // addNavItem("Portfolio", "#portfolio");
-//
 function addNavItem(text, href) {
-  const li = document.createElement('li');
-  const a = document.createElement('a');
-  a.classList.add('nav-link');
+  const li = document.createElement("li");
+  const a = document.createElement("a");
+  a.className = "nav-link";
   a.href = href;
   a.textContent = text;
   li.appendChild(a);
-  document.querySelector(".nav-list").appendChild(li)
+  document.querySelector(".nav-list").appendChild(li);
 }
+
 addNavItem("Blog", "#blog");
 addNavItem("Portfolio", "#portfolio");
-
 // TODO 2  create a paragraph and insert it BEFORE the article's first paragraph
-const newParagraph = document.createElement('p');
-newParagraph.textContent = "I was inserted before the first paragraph.";
-article.insertBefore(newParagraph, article.querySelector('p'));
-
+const newPara = document.createElement("p");
+newPara.textContent = "This paragraph was inserted before the first one.";
+const firstContent = document.querySelector("article .content");
+article.insertBefore(newPara, firstContent);
 // TODO 3  clone the first nav li (deep), change its text to "Cloned", prepend it to the list
-const clone=ul.firstElementChild.cloneNode(true);
-clone.querySelector('a').textContent = "Cloned";
-ul.prepend(clone);
+const firstLi = document.querySelector(".nav-list li");
+const clonedLi = firstLi.cloneNode(true);
+clonedLi.querySelector("a").textContent = "Cloned";
+document.querySelector(".nav-list").prepend(clonedLi);
 // TODO 4  remove the footer
 footer.remove();
-
 
 // ============================================
 // STEP 5 — COMMIT as you go
