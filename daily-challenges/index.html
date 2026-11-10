@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 5 Daily DOM Challenges</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { max-width: 850px; margin: 2rem auto; padding: 0 1rem; color: #1f2937; font: 16px/1.5 Arial, sans-serif; transition: background-color 180ms, color 180ms; }
+    section { margin: 1.25rem 0; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 8px; }
+    button { margin: .25rem; padding: .55rem .75rem; font: inherit; cursor: pointer; }
+    img { max-width: 180px; }
+    #copy-source, #copy-target { min-height: 3rem; padding: .75rem; margin: .5rem 0; border: 1px dashed #64748b; }
+    .dark-mode { color: #e5e7eb; background: #111827; }
+    .dark-mode section { border-color: #64748b; }
+    .dark-mode #copy-source, .dark-mode #copy-target { background: #1f2937; }
+    .challenge-paragraph { display: flex; justify-content: space-between; gap: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Week 5 Daily DOM Challenges</h1>
+  <section>
+    <h2>Day 1: Color changer</h2>
+    <p>Click to apply a random color to every h1, h2, and h3 on this page.</p>
+    <button id="change-colors" type="button">Change heading colors</button>
+  </section>
+  <section>
+    <h2>Day 2: Dynamic element creator</h2>
+    <button id="add-paragraph" type="button">Add numbered paragraph</button>
+    <div id="paragraphs" aria-live="polite"></div>
+  </section>
+  <section>
+    <h2>Day 3: Image remover</h2>
+    <p>Use the button to remove the sample image. Use the bonus button to hide or show it.</p>
+    <img id="sample-image" alt="Decorative landscape placeholder" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='160'%3E%3Crect width='100%25' height='100%25' fill='%23bfdbfe'/%3E%3Ccircle cx='285' cy='42' r='23' fill='%23facc15'/%3E%3Cpath d='M0 150L100 65l75 63 62-48 123 70' fill='%234ade80'/%3E%3C/svg%3E">
+    <div><button id="remove-images" type="button">Remove all images</button><button id="toggle-images" type="button">Hide or show image</button></div>
+  </section>
+  <section>
+    <h2>Day 4: Content copier</h2>
+    <div id="copy-source" draggable="true">Copy this sample content.</div>
+    <div id="copy-target" aria-label="Copy target">Copied content appears here.</div>
+    <button id="copy-content" type="button">Copy source to target</button>
+    <p class="hint">Bonus: drag the source box into the target box.</p>
+  </section>
+  <section>
+    <h2>Day 5: Dark mode</h2>
+    <button id="toggle-dark-mode" type="button" aria-pressed="false">Toggle dark mode</button>
+    <p>Your preference is saved in this browser.</p>
+  </section>
+  <script src="daily-challenges.js" defer></script>
+</body>
+</html>

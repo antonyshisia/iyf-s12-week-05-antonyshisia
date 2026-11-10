@@ -90,6 +90,9 @@ button {
 .delete-task {
   color: #dc2626;
   font-size: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
 }
 
 .edit-input {
@@ -137,3 +140,20 @@ input:focus-visible {
     font-size: 27px;
   }
 }
+.task-item:hover .delete-task,
+.task-item:focus-within .delete-task {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (hover: none) {
+  .delete-task {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+
+#delegated-list .completed { text-decoration: line-through; }
+
+

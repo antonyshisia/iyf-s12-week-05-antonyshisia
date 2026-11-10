@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10 Event Practice</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { max-width: 900px; margin: 2rem auto; padding: 0 1rem; color: #1f2937; font: 16px/1.5 Arial, sans-serif; }
+    section { margin: 1.5rem 0; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 8px; }
+    button, input { margin: .25rem; padding: .55rem .75rem; font: inherit; }
+    .error { color: #b91c1c; }
+    .invalid { border-color: #b91c1c; }
+    .success { color: #166534; }
+    .boxes, .boxes div { padding: 1rem; border: 1px solid #64748b; }
+    #grandparent { background: #eff6ff; } #parent { background: #fef3c7; } #child { background: #dcfce7; }
+    li { margin: .4rem 0; }
+    .hint { color: #64748b; }
+  </style>
+</head>
+<body>
+  <h1>Lesson 10 Event Practice</h1>
+  <p>Use this page for the event, event-object, delegation, and form exercises.</p>
+
+  <section>
+    <h2>10.1 Event listeners and click counter</h2>
+    <button id="listener-demo" type="button">Add a demonstration button</button>
+    <button id="remove-listener" type="button">Remove its named listener</button>
+    <p id="listener-output" aria-live="polite">No demonstration button yet.</p>
+    <p>Counter: <strong id="count" aria-live="polite">0</strong></p>
+    <button id="increment" type="button">+</button>
+    <button id="decrement" type="button">−</button>
+    <button id="reset" type="button">Reset</button>
+    <p id="event-types" tabindex="0">Try click, double-click, mouse enter/leave, and keyboard events here. Open the console to see event types.</p>
+  </section>
+
+  <section>
+    <h2>10.2 Event object and keyboard shortcuts</h2>
+    <a id="prevent-link" href="https://example.com">Click to see preventDefault()</a>
+    <form id="shortcut-form">
+      <label for="shortcut-name">Practice field</label>
+      <input id="shortcut-name" name="name" autocomplete="off">
+      <button type="submit">Submit practice form</button>
+    </form>
+    <p class="hint">Ctrl+S shows Saved!, Escape clears this form, and Ctrl+Enter submits it.</p>
+    <p id="shortcut-status" aria-live="polite"></p>
+  </section>
+
+  <section>
+    <h2>10.3 Bubbling and event delegation</h2>
+    <div id="grandparent" class="boxes">Grandparent
+      <div id="parent">Parent
+        <div id="child">Child (click to observe bubbling in the console)</div>
+      </div>
+    </div>
+    <h3>Delegated list</h3>
+    <form id="delegated-form"><label for="delegated-input">New item</label>
+      <input id="delegated-input" autocomplete="off"><button type="submit">Add item</button>
+    </form>
+    <ul id="delegated-list" aria-label="Delegated items">
+      <li><span>First item</span> <button type="button" data-action="delete">Delete</button></li>
+      <li><span>Second item</span> <button type="button" data-action="delete">Delete</button></li>
+    </ul>
+    <p class="hint">One click listener on the list handles completion and deletion for existing and new items.</p>
+  </section>
+
+  <section>
+    <h2>10.4 Contact form validation</h2>
+    <form id="contact-form" novalidate>
+      <div><label for="name">Name</label><input id="name" name="name" autocomplete="name" aria-describedby="name-error"><span id="name-error" class="error"></span></div>
+      <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-error"><span id="email-error" class="error"></span></div>
+      <button type="submit">Validate and submit</button>
+    </form>
+    <p id="form-status" aria-live="polite"></p>
+  </section>
+  <script src="lesson10.js" defer></script>
+</body>
+</html>

@@ -16,6 +16,11 @@ const check = (label, ok) => console.log(`${ok ? "✓" : "✗"} ${label}`);
 // ============================================
 // TODO 1  the h1
 const heading = document.querySelector("h1");
+// The two legacy selector methods from the lesson (both return live HTMLCollections).
+const contentByClass = document.getElementsByClassName("content");
+const paragraphsByTag = document.getElementsByTagName("p");
+console.log(contentByClass);
+console.log(paragraphsByTag);
 console.log(heading);
 // TODO 2  all elements with class "content"
 const contentParagraphs = document.querySelectorAll(".content");
@@ -54,7 +59,7 @@ console.log(navTexts);
 // STEP 2 — Task 9.2: traverse. Say the route out loud before you write it.
 // ============================================
 // TODO 1  from the header, find the nav inside it
-const header = document.querySelector("#main-header");
+const header = document.querySelector("header");
 const nav = header.querySelector("nav");
 console.log(nav);
 
@@ -68,10 +73,10 @@ const nextSection = article.nextElementSibling;
 console.log(nextSection);
 // TODO 4  from the ul, get all its child li elements
 const ul = document.querySelector(".nav-list");
-const childLis = ul.children; // or ul.querySelectorAll("li")
+const childLis = ul.children;
 console.log(childLis);
 // TODO 5  from the footer, go up to the body
-const body = footer.closest("body"); // or footer.parentElement.parentElement
+const body = footer.closest("body");
 console.log(body);
 // TODO 6  from the first .nav-link, use closest() to reach the header
 const closestHeader = firstNavLink.closest("header");
@@ -103,8 +108,9 @@ contentParagraphs[1].classList.toggle("accent");
 //   document.getElementById("safe").textContent = userInput;   // and now?
 //   Write one sentence in a comment: which one would you use for a user's comment, and why?
 const userInput = `<img src="x" onerror="alert('hacked!')">`;
-document.getElementById("unsafe").innerHTML = userInput;   // runs the alert (dangerous)
-document.getElementById("safe").textContent = userInput;   // shows the text safely
+document.getElementById("unsafe").innerHTML = userInput;
+document.getElementById("safe").textContent = userInput;
+// I would use the second method (textContent) for a user's comment, because it is safer and prevents the execution of potentially harmful scripts.
 
 
 // ============================================
@@ -130,6 +136,7 @@ addNavItem("Portfolio", "#portfolio");
 // TODO 2  create a paragraph and insert it BEFORE the article's first paragraph
 const newPara = document.createElement("p");
 newPara.textContent = "This paragraph was inserted before the first one.";
+newPara.className = "content highlight";
 const firstContent = document.querySelector("article .content");
 article.insertBefore(newPara, firstContent);
 // TODO 3  clone the first nav li (deep), change its text to "Cloned", prepend it to the list
@@ -139,6 +146,14 @@ clonedLi.querySelector("a").textContent = "Cloned";
 document.querySelector(".nav-list").prepend(clonedLi);
 // TODO 4  remove the footer
 footer.remove();
+// Remove the last nav item (currently "Portfolio")
+const lastNavItem = ul.lastElementChild;
+lastNavItem.parentElement.removeChild(lastNavItem);
+
+// Clear all children from the article
+while (article.firstChild) {
+  article.removeChild(article.firstChild);
+}
 
 // ============================================
 // STEP 5 — COMMIT as you go
